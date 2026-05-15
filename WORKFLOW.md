@@ -22,3 +22,23 @@ To ensure that AI-assisted outputs are reliable, predictable, and robust, it is 
 
 ### Step 5: Verification (Code Review)
 * Conduct a rigorous post-generation review adhering strictly to the code verification rules detailed in `AGENTS.md`.
+* Apply the **Zero Unexplained Lines** rule: every block of AI-generated code must be explainable by the human reviewer before it is merged. If you cannot articulate *why* a specific approach was chosen, reject the block and regenerate with a stricter prompt.
+* Force a secondary self-audit by the LLM: prompt it to re-examine its own output for performance anti-patterns, hidden coupling, and edge-case gaps before you begin your own review.
+
+### Step 6: Documentation & Auditability
+* **Log Intent, Not Conversations:** Do not commit raw chat transcripts. Instead, document the *core instruction template* used to generate a significant module — either in the commit message or a short inline comment block.
+* **Prompt Versioning:** If a feature required a complex multi-step prompt structure, preserve that structure in the relevant commit message so the same context can be reconstructed when the module needs to be extended in the future.
+* **Commit Discipline:** Each commit should represent one complete SDD cycle iteration. The commit message should answer: *what changed, why this approach, and which AI-assisted decisions were made.*
+
+---
+
+## 🔁 The Iterative Loop
+
+The SDD loop is not strictly linear. Verification failures at **Step 5** should route back to the appropriate upstream step:
+
+| Failure Type | Route Back To |
+|---|---|
+| Logic does not match specification | Step 3 — redefine criteria |
+| Architectural approach is flawed | Step 2 — revise the plan |
+| Scope is unclear or too large | Step 1 — re-isolate the bounded context |
+| Output is correct but unauditable | Step 4 — regenerate in smaller increments |
