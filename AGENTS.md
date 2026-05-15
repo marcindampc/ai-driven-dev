@@ -9,12 +9,12 @@ Never treat an LLM as an infallible oracle. Treat your AI agent as a brilliant b
 
 ### 1. Mandatory Step-by-Step Justification
 * **The Rule:** If any code pattern, library choice, or async approach used by the AI raises questions or seems complex, the LLM must justify its reasoning.
-* **Control Prompt Template:** *“Explain to me step-by-step why you chose this specific method, what hidden performance risks (e.g., memory bloat, thread blocking) it carries, and what architectural alternatives were available.”*].
+* **Control Prompt Template:** *“Explain to me step-by-step why you chose this specific method, what hidden performance risks (e.g., memory bloat, thread blocking) it carries, and what architectural alternatives were available.”*.
 
 ### 2. Intent-Driven Inline Commenting
 * **The Rule:** The AI is strictly required to document the *intent* behind its architectural choices directly in the code, rather than merely commenting on what the syntax does.
-* **The Why:** Documenting the underlying business intent allows the human reviewer to instantly spot if the generated logic actually solves the problem, or if it is just "vibe coding" that appears to work but breaks edge cases].
+* **The Why:** Documenting the underlying business intent allows the human reviewer to instantly spot if the generated logic actually solves the problem, or if it is just "vibe coding" that appears to work but breaks edge cases.
 
 ### 3. Auditing for "Hidden Costs" (Framework Traps)
-* **The Rule:** LLMs frequently output code that is syntactically flawless but architecturally disastrous (e.g., causing N+1 query problems, breaking lazy-loading patterns, or ignoring proper database transaction boundaries)].
-* **The Protocol:** Always force the AI to run a secondary self-audit prompt checking for performance anti-patterns specific to the target framework/stack before merging].
+* **The Rule:** LLMs frequently output code that is syntactically flawless but architecturally disastrous (e.g., causing N+1 query problems, breaking lazy-loading patterns, or ignoring proper database transaction boundaries).
+* **The Protocol:** Always force the AI to run a secondary self-audit prompt checking for performance anti-patterns specific to the target framework/stack before merging.
